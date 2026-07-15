@@ -8,10 +8,11 @@ const store = useGameStore();
   <div class="guessing-screen">
     <div class="header">
       <h2>
-        C'est à <span>{{ store.currentGuessingPlayer }}</span> de jouer !
+        <span>{{ store.currentGuessingPlayer }}</span
+        >, fait ton classement !
       </h2>
       <p class="subtitle">
-        Classe ces mots dans ta tête, les autres doivent deviner ton classement.
+        Classe ces mots dans ta tête, les autres doivent deviner l'ordre.
       </p>
     </div>
 
@@ -57,8 +58,9 @@ h2 {
 
 h2 span {
   color: var(--color-primary);
-  display: block;
-  font-size: 2.5rem;
+  /* display: block; */
+  /* font-size: 2.5rem; */
+  font-weight: 700;
   margin-top: 0.5rem;
 }
 

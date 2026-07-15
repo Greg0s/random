@@ -53,7 +53,7 @@ function finishTurn() {
 <template>
   <div class="word-input-screen">
     <h2 class="turn-title">
-      Au tour de <span>{{ currentPlayerName }}</span>
+      Au tour de <span>{{ currentPlayerName }}</span> d'ajouter ses mots
     </h2>
 
     <div class="card">
@@ -116,6 +116,7 @@ function finishTurn() {
 
 .turn-title span {
   color: var(--color-primary);
+  font-weight: 700;
 }
 
 .card {
