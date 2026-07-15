@@ -26,16 +26,17 @@ const store = useGameStore();
 <style scoped>
 .app-header {
   display: flex;
-  justify-content: center; /* Centers the logo horizontally */
+  justify-content: center;
   align-items: center;
-  position: relative; /* Context for absolute positioning of actions */
+  position: relative;
   width: 100%;
-  padding: 1rem 0 2rem 0;
+  /* Added left and right padding */
+  padding: 1.5rem 1rem 2rem 1rem;
   flex: 0 0 auto;
 }
 
 .app-logo {
-  font-size: 3rem; /* Restored to original size */
+  font-size: 3rem;
   line-height: 0.9;
   color: var(--color-success);
   text-transform: uppercase;
@@ -46,7 +47,8 @@ const store = useGameStore();
 
 .header-actions {
   position: absolute;
-  right: 0;
+  /* Shifted from the absolute right edge */
+  right: 1rem;
   display: flex;
   align-items: center;
 }
@@ -56,5 +58,7 @@ const store = useGameStore();
   width: 100%;
   display: flex;
   flex-direction: column;
+  /* Added horizontal padding for all inner pages */
+  padding: 0 1rem 1rem 1rem;
 }
 </style>
