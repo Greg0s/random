@@ -6,11 +6,15 @@ import ScreenGuessing from "./components/ScreenGuessing.vue";
 import ThemeToggle from "./components/ThemeToggle.vue";
 
 const store = useGameStore();
+
+function goHome() {
+  store.currentPhase = 1;
+}
 </script>
 
 <template>
   <header class="app-header">
-    <h1 class="app-logo">RAN<br />DOM</h1>
+    <h1 class="app-logo" @click="goHome">RAN<br />DOM</h1>
     <div class="header-actions">
       <ThemeToggle />
     </div>
@@ -43,6 +47,7 @@ const store = useGameStore();
   font-weight: 900;
   margin: 0;
   text-align: center;
+  cursor: pointer;
 }
 
 .header-actions {
