@@ -51,7 +51,7 @@ function startGame() {
         <h2>Noms des joueurs</h2>
         <div class="players-list">
           <input
-            v-for="(name, index) in playerNames"
+            v-for="(_, index) in playerNames"
             :key="index"
             v-model="playerNames[index]"
             type="text"
