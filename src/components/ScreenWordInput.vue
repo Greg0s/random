@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed } from "vue";
 import { useGameStore } from "../stores/game";
 
 const store = useGameStore();
 
-// Pre-fill the first word for development testing
-const currentWord = ref("Mot 1");
+const currentWord = ref("");
 const playerWords = ref<string[]>([]);
 
 const currentPlayerName = computed(
@@ -14,18 +13,6 @@ const currentPlayerName = computed(
 const wordsPerPlayer = computed(() => store.wordsPerPlayer);
 const isTurnComplete = computed(
   () => playerWords.value.length === wordsPerPlayer.value,
-);
-
-// Watcher to auto-fill the next word for testing
-watch(
-  () => playerWords.value.length,
-  (newLength) => {
-    if (isTurnComplete.value === false) {
-      currentWord.value = `Mot ${newLength + 1}`;
-    } else {
-      currentWord.value = "";
-    }
-  },
 );
 
 function addWord() {
@@ -44,24 +31,21 @@ function addWord() {
     }
 
     playerWords.value.push(word);
+
+    // Clear input after adding
+    currentWord.value = "";
   }
 }
 
 function removeWord(index: number) {
   playerWords.value.splice(index, 1);
-
-  // Re-fill the input when a word is removed
-  if (isTurnComplete.value === false) {
-    currentWord.value = `Mot ${playerWords.value.length + 1}`;
-  }
 }
 
 function finishTurn() {
   if (isTurnComplete.value === true) {
     store.submitPlayerWords(playerWords.value);
     playerWords.value = [];
-    // Reset to first word for the next player
-    currentWord.value = "Mot 1";
+    currentWord.value = "";
   }
 }
 </script>

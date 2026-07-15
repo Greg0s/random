@@ -5,20 +5,8 @@ import { useGameStore } from "../stores/game";
 const store = useGameStore();
 const playerCount = ref<number>(5);
 
-// Pre-fill names for development testing
-const defaultDevNames = [
-  "Alice",
-  "Bob",
-  "Charlie",
-  "David",
-  "Eve",
-  "Frank",
-  "Grace",
-  "Hugo",
-  "Iris",
-  "John",
-];
-const playerNames = ref<string[]>(defaultDevNames.slice(0, 5));
+// Initialize with empty strings
+const playerNames = ref<string[]>(Array(5).fill(""));
 
 function updatePlayerCount(delta: number) {
   const newCount = playerCount.value + delta;
@@ -26,10 +14,9 @@ function updatePlayerCount(delta: number) {
   if (newCount >= 2 && newCount <= 10) {
     playerCount.value = newCount;
 
-    // Adjust player names array size
+    // Adjust player names array size with empty strings
     if (delta > 0) {
-      const devName = defaultDevNames[playerCount.value - 1];
-      playerNames.value.push(devName);
+      playerNames.value.push("");
     } else {
       playerNames.value.pop();
     }
