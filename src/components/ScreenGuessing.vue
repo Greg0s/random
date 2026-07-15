@@ -79,6 +79,7 @@ h2 span {
 
 .words-list {
   list-style: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
