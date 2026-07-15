@@ -1,12 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap");
 
 :root {
-  --color-bg: #fcf4eb;
+  /* Set light theme colors */
+  --color-bg: #ffffff;
   --color-primary: #ff8a00;
-  --color-text: #5c2a00;
-  --color-surface: #ffffff;
+  --color-text: #2d1a00;
+  --color-surface: #f9f5f0;
   --border-radius-lg: 24px;
   --border-radius-pill: 50px;
+  /* Safe area for mobile navigation bars */
+  --safe-bottom: env(safe-area-inset-bottom, 24px);
 }
 
 * {
@@ -14,6 +17,8 @@
   margin: 0;
   padding: 0;
   font-family: "Fredoka", sans-serif;
+  /* Remove default tap highlight on mobile */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -21,13 +26,24 @@ body {
   color: var(--color-text);
   display: flex;
   justify-content: center;
-  min-height: 100vh;
+  /* Prevent horizontal scroll and edge touching */
+  width: 100%;
+  min-height: 100dvh;
+  overflow-x: hidden;
 }
 
 #app {
   width: 100%;
   max-width: 480px;
-  padding: 2rem 1.5rem;
+  min-height: 100dvh;
+  /* Increase lateral padding to 2rem and add extra bottom margin */
+  padding: 2rem 2rem calc(var(--safe-bottom) + 3rem);
   display: flex;
   flex-direction: column;
+}
+
+/* Prevent double-tap zoom on interactive elements */
+button,
+input {
+  touch-action: manipulation;
 }

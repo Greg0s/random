@@ -1,4 +1,19 @@
 :root {
+  /* Component variables for Light Mode */
+  --color-bg: #ffffff;
+  --color-surface: #f9fafb;
+  --color-text: #111827;
+  --color-primary: #f97316;
+  --color-primary-light: #ffedd5;
+  --color-success: #8cc269;
+  --color-danger: #ef4444;
+  --color-shadow: rgba(0, 0, 0, 0.05);
+  --color-shadow-strong: rgba(255, 138, 0, 0.3);
+
+  --border-radius-pill: 9999px;
+  --border-radius-lg: 12px;
+
+  /* Existing Vite template variables */
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -11,15 +26,15 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
-  background: var(--bg);
+  background: var(--color-bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -32,6 +47,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Component variables for Dark Mode overrides */
+    --color-bg: #111827;
+    --color-surface: #1f2937;
+    --color-text: #f9fafb;
+    --color-primary: #ea580c;
+    --color-primary-light: #431407;
+    --color-success: #4ade80;
+    --color-danger: #f87171;
+    --color-shadow: rgba(0, 0, 0, 0.4);
+    --color-shadow-strong: rgba(234, 88, 12, 0.3);
+
+    /* Existing Vite template variables overrides */
     --text: #9ca3af;
     --text-h: #f3f4f6;
     --bg: #16171d;
@@ -70,6 +97,7 @@ h1 {
     margin: 20px 0;
   }
 }
+
 h2 {
   font-size: 24px;
   line-height: 118%;
@@ -79,6 +107,7 @@ h2 {
     font-size: 20px;
   }
 }
+
 p {
   margin: 0;
 }
@@ -279,7 +308,7 @@ code {
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -4.5px;
     border: 5px solid transparent;

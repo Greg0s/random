@@ -1,28 +1,41 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useGameStore } from "../stores/game";
 
 const store = useGameStore();
 
-// État local pour le joueur en cours
-const currentWord = ref("");
+// Pre-fill the first word for development testing
+const currentWord = ref("Mot 1");
 const playerWords = ref<string[]>([]);
 
 const currentPlayerName = computed(
   () => store.players[store.currentPlayerIndex],
 );
 const wordsPerPlayer = computed(() => store.wordsPerPlayer);
-const wordsRemaining = computed(
-  () => wordsPerPlayer.value - playerWords.value.length,
-);
 const isTurnComplete = computed(
   () => playerWords.value.length === wordsPerPlayer.value,
 );
 
+// Watcher to auto-fill the next word for testing
+watch(
+  () => playerWords.value.length,
+  (newLength) => {
+    if (isTurnComplete.value === false) {
+      currentWord.value = `Mot ${newLength + 1}`;
+    } else {
+      currentWord.value = "";
+    }
+  },
+);
+
 function addWord() {
   const word = currentWord.value.trim();
-  if (word && !isTurnComplete.value) {
-    // Vérification optionnelle : éviter les doublons pour un même joueur
+
+  if (word !== "") {
+    if (isTurnComplete.value === true) {
+      return;
+    }
+
     if (
       playerWords.value.map((w) => w.toLowerCase()).includes(word.toLowerCase())
     ) {
@@ -31,21 +44,24 @@ function addWord() {
     }
 
     playerWords.value.push(word);
-    currentWord.value = ""; // On vide l'input
   }
 }
 
 function removeWord(index: number) {
   playerWords.value.splice(index, 1);
+
+  // Re-fill the input when a word is removed
+  if (isTurnComplete.value === false) {
+    currentWord.value = `Mot ${playerWords.value.length + 1}`;
+  }
 }
 
 function finishTurn() {
-  if (isTurnComplete.value) {
-    // On envoie les mots au store (qui passera au joueur suivant ou à la phase 3)
+  if (isTurnComplete.value === true) {
     store.submitPlayerWords(playerWords.value);
-    // On réinitialise l'état local pour le prochain joueur
     playerWords.value = [];
-    currentWord.value = "";
+    // Reset to first word for the next player
+    currentWord.value = "Mot 1";
   }
 }
 </script>
@@ -123,7 +139,7 @@ function finishTurn() {
   border-radius: var(--border-radius-lg);
   padding: 1.5rem;
   width: 100%;
-  box-shadow: 0 4px 12px rgba(255, 138, 0, 0.05);
+  box-shadow: 0 4px 12px var(--color-shadow);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -144,6 +160,7 @@ function finishTurn() {
   flex: 1;
   padding: 0.75rem 1rem;
   border: 2px solid var(--color-bg);
+  background: var(--color-bg);
   border-radius: 12px;
   font-size: 1rem;
   outline: none;
@@ -168,7 +185,7 @@ function finishTurn() {
 
 .success-message {
   text-align: center;
-  color: #8cc269; /* Vert rappelant le logo */
+  color: var(--color-success);
   font-weight: bold;
   font-size: 1.2rem;
   padding: 0.5rem 0;
@@ -195,7 +212,7 @@ function finishTurn() {
 .btn-delete {
   background: none;
   border: none;
-  color: #ff4b4b;
+  color: var(--color-danger);
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
@@ -216,7 +233,7 @@ function finishTurn() {
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(255, 138, 0, 0.3);
+  box-shadow: 0 4px 12px var(--color-shadow-strong);
   margin-top: 1rem;
   transition: opacity 0.3s;
 }

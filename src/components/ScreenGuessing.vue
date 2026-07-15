@@ -74,7 +74,7 @@ h2 span {
   border-radius: var(--border-radius-lg);
   padding: 1.5rem;
   width: 100%;
-  box-shadow: 0 4px 12px rgba(255, 138, 0, 0.05);
+  box-shadow: 0 4px 12px var(--color-shadow);
 }
 
 .words-list {
@@ -126,7 +126,7 @@ h2 span {
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(255, 138, 0, 0.3);
+  box-shadow: 0 4px 12px var(--color-shadow-strong);
   margin-top: 1rem;
 }
 </style>
