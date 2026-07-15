@@ -49,10 +49,6 @@ function startGame() {
 
 <template>
   <div class="home">
-    <div class="header">
-      <h1 class="fallback-logo">RAN<br />DOM</h1>
-    </div>
-
     <div class="content">
       <div class="section">
         <h2>Nombre de joueurs</h2>
@@ -95,20 +91,6 @@ function startGame() {
   height: 100%;
   width: 100%;
   justify-content: space-between;
-}
-
-.header {
-  flex: 0 0 auto;
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
-
-.fallback-logo {
-  font-size: 3rem;
-  line-height: 0.9;
-  color: var(--color-success);
-  text-transform: uppercase;
-  font-weight: 900;
 }
 
 .content {

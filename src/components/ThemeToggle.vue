@@ -38,10 +38,7 @@ onMounted(() => {
 
 <style scoped>
 .theme-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 50;
+  /* Position absolute removed to fit inside the flex header */
   background: var(--color-surface);
   border: 2px solid var(--border);
   color: var(--color-text);
@@ -55,6 +52,7 @@ onMounted(() => {
   cursor: pointer;
   box-shadow: 0 4px 12px var(--color-shadow);
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .theme-toggle:hover {
