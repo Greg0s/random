@@ -1,3 +1,18 @@
+/* Reset box-sizing to prevent width overflow from borders and paddings */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   /* Component variables for Light Mode */
   --color-bg: #ffffff;
