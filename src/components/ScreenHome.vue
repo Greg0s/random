@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useGameStore } from "../stores/game";
 
 const store = useGameStore();
@@ -7,6 +7,24 @@ const playerCount = ref<number>(5);
 
 // Initialize with empty strings
 const playerNames = ref<string[]>(Array(5).fill(""));
+
+// Load saved names from localStorage when the component mounts
+onMounted(() => {
+  const savedNames = localStorage.getItem("game_player_names");
+
+  if (savedNames !== null) {
+    try {
+      const parsedNames = JSON.parse(savedNames);
+
+      if (Array.isArray(parsedNames) && parsedNames.length >= 2 && parsedNames.length <= 10) {
+        playerNames.value = parsedNames;
+        playerCount.value = parsedNames.length;
+      }
+    } catch (e) {
+      console.error("Failed to parse saved player names", e);
+    }
+  }
+});
 
 function updatePlayerCount(delta: number) {
   const newCount = playerCount.value + delta;
@@ -27,6 +45,8 @@ function startGame() {
   const validNames = playerNames.value.filter((name) => name.trim() !== "");
 
   if (validNames.length === playerCount.value) {
+    // Save valid names to localStorage for future games
+    localStorage.setItem("game_player_names", JSON.stringify(validNames));
     store.startGame(validNames);
   } else {
     alert("Veuillez remplir tous les noms des joueurs.");
